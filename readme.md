@@ -1,19 +1,20 @@
 # Bot discord du Duck-parapente
 
-Bot utilisant l'API **discord.js** pour intéragir avec le [serveur discord du Duck](https://discord.gg/2Nh3A8vc)
+Bot utilisant l'API **discord.js** pour intéragir avec le [serveur discord du Duck](https://discord.gg/2Nh3A8vc).
+
 Projet bénévole porté par les membres du club.
 
 ## Usage
 ### Commandes disponibles
 - `/archive` - déplace le salon dans le bon dossier ARCHIVES. Créé un nouveau dossier ARCHIVES si besoin.
-- `/balise`  - affiche les dernières valeurs et directions de vent autour de Grenoble (source : murblanc.org/sthil)
+- `/balise`  - affiche les dernières valeurs et directions de vent autour de Grenoble (source : murblanc.org/sthil).
 
 
 ### Jobs automatiques
 - `every hour`  - archive les salons périmés des catégories [Sorties/Evénements/Compétitions] (uniquement si le format de date est valide, e.g. 28-02-chamrousse)
 - `every 10 min` - met à jour les stats du serveur dans le salon `ADMIN > STATS`
 
-## TODO
+## Todo
 
 - Fonction qui manipule les rôles des membres pour afficher certains salons uniquement aux membres ayant cotisé au club pour l'année en cours
 - Améliorer la commande `/archive` pour qu'elle transforme le salon en thread dans un unique salon `archives`, nous permettant alors de garder l'historique des sorties ad vitam aeternam (@Romain.L ?)
