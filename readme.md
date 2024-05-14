@@ -7,7 +7,7 @@ Projet bénévole porté par les membres du club.
 ## Usage
 ### Commandes disponibles
 - `/archive` - déplace le salon dans le bon dossier ARCHIVES. Créé un nouveau dossier ARCHIVES si besoin.
-- `/balise`  - affiche les dernières valeurs et directions de vent autour de Grenoble (source : murblanc.org/sthil).
+- `/balise`  - affiche les dernières valeurs et directions de vent autour de Grenoble. Source : [murblanc.org/sthil](https://murblanc.org/sthil)
 
 
 ### Jobs automatiques
@@ -22,7 +22,7 @@ Projet bénévole porté par les membres du club.
 - Commande /notam pour afficher toutes les NOTAM en cours entre 2 points GPS
 
 Autres idées :
-- Ajouter un webhook qui notifie la création d'un nouvel article sur le site du Duck 
+- Ajouter un webhook qui notifie la création d'un nouvel article sur le site du Duck
 - Ajouter un salon `creation-sorties` où seul le bot peut écrire, pour les membres qui souhaitent recevoir une notification lorsqu'une nouvelle sortie est proposée
 
 ## Installation
@@ -33,8 +33,9 @@ Autres idées :
 - NPM v6 ou plus récent.
 - Créer un fichier `.env` à la racine en suivant cet exemple :
 ```bash
-BOT_TOKEN="Token_du_bot"
-GUILD_ID="ID_du_serveur"
+BOT_TOKEN=Token_du_bot
+GUILD_ID=ID_du_serveur
+CHROMIUM_PATH=/bin/chromium-browser
 ```
 
 ### CLI
@@ -43,4 +44,17 @@ GUILD_ID="ID_du_serveur"
 npm i
 # run bot
 node .
+```
+
+PS: Pour utiliser certaines commandes (comme `/balise`) il est nécessaire d'installer Chromium (nécessaire pour Puppeteer). Il faut ensuite indiquer le chemin vers l'éxécutable dans le fichier .env (car différent selon les distrubtions Linux). Voir l'exemple de fichier `.env` ci-dessus.
+
+Debian
+```
+sudo apt update
+sudo apt install chromium
+```
+Ubuntu
+```
+sudo apt-get update
+sudo apt-get install chromium-browser
 ```
