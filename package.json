@@ -1,0 +1,20 @@
+{
+	"name": "canard-bot",
+	"version": "2.0.3",
+	"description": "Discord bot for Duck-parapente",
+	"main": "src/Bot.js",
+	"keywords": [],
+	"author": "Nicolas Bertin",
+	"license": "MIT",
+	"dependencies": {
+		"discord.js": "^14.11.0",
+		"dotenv": "^16.3.1",
+		"path": "^0.12.7",
+		"puppeteer": "^22.7.1"
+	},
+	"imports": {
+		"#events/*": "./events/*",
+		"#commands/*": "./events/commands/*.js"
+	},
+	"type": "module"
+}
