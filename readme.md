@@ -58,3 +58,5 @@ Ubuntu
 sudo apt-get update
 sudo apt-get install chromium-browser
 ```
+
+Enfin, j'ai bloqué le package puppeteer à la version 15, les versions plus récentes ne marchent pas sur Debian.
