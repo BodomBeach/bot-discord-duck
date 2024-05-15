@@ -16,4 +16,13 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{ secrets.PORT }}
-          script: whoami
+          script: |
+            cd ~/bot-discord-duck
+            echo "Pulling code"
+            git pull
+            echo "Pruning docker"
+            docker system prune -f
+            echo "Restarting docker"
+            docker compose down
+            docker compose -f compose.yaml -f compose.prod.yaml up --build
+
