@@ -25,8 +25,6 @@ export function channelCleanup(client) {
 
             let channel_date = new Date(today.getFullYear(), (parseInt(match[2]) - 1), (parseInt(match[1]) + 1));
 
-            console.log(channel_date);
-
             if (today > channel_date) {
                 console.log(`${channel.name} too old, archiving !`);
                 archive(channel)
