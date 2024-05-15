@@ -11,6 +11,7 @@ const create = () => {
 };
 
 const invoke = async (interaction) => {
+  console.log(`${interaction.user.username} used /balise`);
 	interaction.deferReply();
 
 	const image  = await getScreenhot('table table tbody');

@@ -1,12 +1,12 @@
 # Bot discord du Duck-parapente
 
-Bot utilisant l'API **discord.js** pour intéragir avec le [serveur discord du Duck](https://discord.gg/2Nh3A8vc).
+Bot utilisant l'API  [discord.js](https://discord.js.org/) pour intéragir avec le [serveur discord du Duck](https://discord.gg/2Nh3A8vc).
 
 Projet bénévole porté par les membres du club.
 
 ## Usage
 ### Commandes disponibles
-- `/archive` - déplace le salon dans le bon dossier ARCHIVES. Créé un nouveau dossier ARCHIVES si besoin.
+- `/archive` - déplace le salon dans le bon dossier 📁ARCHIVES. Créé un nouveau dossier 📁ARCHIVES si besoin.
 - `/balise`  - affiche les dernières valeurs et directions de vent autour de Grenoble. Source : [murblanc.org/sthil](https://murblanc.org/sthil)
 
 
@@ -19,7 +19,7 @@ Projet bénévole porté par les membres du club.
 - Fonction qui manipule les rôles des membres pour afficher certains salons uniquement aux membres ayant cotisé au club pour l'année en cours
 - Améliorer la commande `/archive` pour qu'elle transforme le salon en thread dans un unique salon `archives`, nous permettant alors de garder l'historique des sorties ad vitam aeternam (@Romain.L ?)
 - Fonction de covoiturage (@JP.DS ?)
-- Commande /notam pour afficher toutes les NOTAM en cours entre 2 points GPS
+- Commande `/notam` pour afficher toutes les NOTAM en cours entre 2 points GPS
 
 Autres idées :
 - Ajouter un webhook qui notifie la création d'un nouvel article sur le site du Duck
@@ -29,34 +29,14 @@ Autres idées :
 
 ### Prérequis
 
-- Node.js v21.7.3 ou plus récent.
-- NPM v6 ou plus récent.
+- Installer docker et docker-compose
 - Créer un fichier `.env` à la racine en suivant cet exemple :
 ```bash
-BOT_TOKEN=Token_du_bot
-GUILD_ID=ID_du_serveur
-CHROMIUM_PATH=/bin/chromium-browser
+GUILD_ID=ID_DU_SERVEUR
+BOT_TOKEN=TOKEN_DU_BOT
 ```
 
 ### CLI
 ```bash
-# installer les dépendances npm
-npm i
-# run bot
-node .
+docker compose up --build
 ```
-
-PS: Pour utiliser certaines commandes (comme `/balise`) il est nécessaire d'installer Chromium (nécessaire pour Puppeteer). Il faut ensuite indiquer le chemin vers l'éxécutable dans le fichier .env (car différent selon les distrubtions Linux). Voir l'exemple de fichier `.env` ci-dessus.
-
-Debian
-```
-sudo apt update
-sudo apt install chromium
-```
-Ubuntu
-```
-sudo apt-get update
-sudo apt-get install chromium-browser
-```
-
-Enfin, j'ai bloqué le package puppeteer à la version 15, les versions plus récentes ne marchent pas sur Debian.

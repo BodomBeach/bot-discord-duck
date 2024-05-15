@@ -1,8 +1,8 @@
 import { EmbedBuilder } from 'discord.js';
 
 export async function serverStats(client) {
-    const guild = client.guilds.cache.get(process.env.GUILD_ID);
-    
+  const guild = client.guilds.cache.get(process.env.GUILD_ID);
+
 	// fetch members first, otherwise guild.roles.cache.get('1232623387965132820').members.size will be empty
 	let members = await guild.members.fetch();
 	const time = (new Date).toLocaleString(
@@ -51,11 +51,12 @@ export async function serverStats(client) {
 
 	const statsChannel = client.channels.cache.find(channel => channel.name === 'stats');
 	let messages =  await statsChannel.messages.fetch({ limit: 1 });
-	
+
 	// Create or edit existing embed
 	if (messages.size === 0) {
 		statsChannel.send({embeds: [embed]});
 	} else {
 		messages.first().edit({embeds: [embed]});
 	} ;
+  console.log('Server stats updated');
 }

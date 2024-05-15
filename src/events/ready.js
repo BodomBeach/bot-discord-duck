@@ -25,7 +25,7 @@ async function invoke(client) {
 
 	client.application.commands.set(commandsArray);
 
-	console.log(`Successfully logged in as ${client.user.tag}!`);
+	console.log(`Successfully logged to Discord as ${client.user.tag}!`);
 }
 
 export { once, name, invoke };

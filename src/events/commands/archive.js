@@ -13,6 +13,7 @@ const create = () => {
 
 // Called by the interactionCreate event listener when the corresponding command is invoked
 const invoke = async (interaction) => {
+  console.log(`${interaction.user.username} used /archive`);
 
 	const allowedCategories = ['🪂 SORTIES', '🏃Sorties pas rapente', '🏆 Compétitions'];
 
