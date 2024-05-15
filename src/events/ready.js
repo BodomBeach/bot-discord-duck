@@ -8,9 +8,9 @@ const name = 'ready';
 async function invoke(client) {
 
 	// start regular jobs
-	setInterval(() => {channelCleanup(client)}, 3600000); // every hour
-	setInterval(() => {serverStats(client)}, 600000); // every 10 min
-	
+	setInterval(() => {channelCleanup(client)}, process.env.CHANNEL_CLEANUP_INTERVAL || 3600000); // every hour
+	setInterval(() => {serverStats(client)}, process.env.STATS_INTERVAL || 600000); // every 10 min
+
 	const commands = fs
 		.readdirSync('src/events/commands')
 		.filter((file) => file.endsWith('.js'))
@@ -24,7 +24,7 @@ async function invoke(client) {
 	}
 
 	client.application.commands.set(commandsArray);
-	
+
 	console.log(`Successfully logged in as ${client.user.tag}!`);
 }
 

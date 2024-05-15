@@ -3,7 +3,7 @@ import archive from '../utils/archive.js';
 export function channelCleanup(client) {
     const guild = client.guilds.cache.get(process.env.GUILD_ID);
     const category = guild.channels.cache.find(channel => channel.type === 4 && channel.name === '🪂 SORTIES');
-    
+
     if (category) {
 
         const allowed = /(\d{1,2})-(\d{1,2})/
@@ -20,7 +20,7 @@ export function channelCleanup(client) {
             // if month is found as a string (e.g. "juin"), do nothing for now, too risky
             if (!allowed.exec(channel.name) || forbidden1.exec(channel.name) || forbidden2.exec(channel.name)) {
                 console.log(`format invalide ${channel.name}`);
-                return 
+                return
             }
 
             let channel_date = new Date(today.getFullYear(), (parseInt(match[2]) - 1), (parseInt(match[1]) + 1));

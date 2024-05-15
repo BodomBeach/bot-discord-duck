@@ -24,8 +24,8 @@ const invoke = async (interaction) => {
 };
 
 const getScreenhot = async (selector) => {
-
-	const browser = await puppeteer.launch({executablePath: process.env.CHROMIUM_PATH});
+  // no-sandbox args are necessary to launch puppeteer as root (docker)
+	const browser = await puppeteer.launch({executablePath: '/usr/bin/google-chrome', args: ['--no-sandbox', '--disable-setuid-sandbox'] });
 	const page = await browser.newPage();
 	await page.setViewport({
 		width: 1920,
@@ -49,7 +49,7 @@ const getScreenhot = async (selector) => {
 		node.querySelectorAll('tr td:last-child').forEach((td) => td.style.fontSize = '20px');
 	});
 
-	// Take a screenshot of the specified element
+	// Take a screenshot of the element
 	const boundingBox = await nodeHandle.boundingBox();
 	const screenshot = await page.screenshot({
 		clip: {
