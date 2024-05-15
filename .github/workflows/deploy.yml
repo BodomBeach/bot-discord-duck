@@ -15,4 +15,4 @@ jobs:
 
       - name: Build and deploy
         run: |
-          docker-compose -compose.yaml -f compose.prod.yaml up -d --build
+          docker-compose -f compose.yaml -f compose.prod.yaml up -d --build
