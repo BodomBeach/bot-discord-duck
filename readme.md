@@ -1,6 +1,6 @@
 # Bot discord du Duck-parapente
 
-Bot utilisant l'API  [discord.js](https://discord.js.org/) pour intéragir avec le [serveur discord du Duck](https://discord.gg/2Nh3A8vc).
+Bot utilisant l'API  [discord.js](https://discord.js.org/) pour intéragir avec le serveur discord du Duck.
 
 Projet bénévole porté par les membres du club.
 
