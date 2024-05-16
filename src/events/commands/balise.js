@@ -16,7 +16,7 @@ const invoke = async (interaction) => {
 
 	const image  = await getScreenhot('table table tbody');
 	const embed = new EmbedBuilder()
-		.setTitle(`${interaction.user.username} a utilisé la commande **/balise**`)
+		.setDescription(`${interaction.user.username} a utilisé la commande **/balise**`)
 		.setImage(`attachment://dashboard.png`);
 
 	const attachment = new AttachmentBuilder(image, 'screenshot.png');

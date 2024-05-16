@@ -1,6 +1,7 @@
 import {archive, allowedCategories} from '../utils/archive.js';
 
 export function channelCleanup(client) {
+  console.log('===== starting scheduled channel cleanup =====');
   const guild = client.guilds.cache.get(process.env.GUILD_ID);
   const categories = guild.channels.cache.filter(channel => allowedCategories.includes(channel.name))
 
