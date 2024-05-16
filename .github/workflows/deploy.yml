@@ -1,7 +1,9 @@
 name: Deploy to Production
-
 on:
   push:
+    branches:
+      - master
+  pull_request:
     branches:
       - master
 jobs:
@@ -9,7 +11,7 @@ jobs:
     name: Deploy
     runs-on: ubuntu-latest
     steps:
-      - name: executing remote ssh commands using ssh key
+      - name: deploy
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.HOST }}
@@ -18,11 +20,7 @@ jobs:
           port: ${{ secrets.PORT }}
           script: |
             cd ~/bot-discord-duck
-            echo "Pulling code"
             git pull
-            echo "Pruning docker"
             docker system prune -f
-            echo "Restarting docker"
             docker compose down
-            docker compose -f compose.yaml -f compose.prod.yaml up --build
-
+            docker compose -f compose.yaml -f compose.prod.yaml up --build -d
