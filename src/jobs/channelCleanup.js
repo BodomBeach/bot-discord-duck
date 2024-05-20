@@ -1,7 +1,10 @@
-import {archive, allowedCategories} from '../utils/archive.js';
+import {archive} from '../utils/archive.js';
 
 export function channelCleanup(client) {
+
+
   console.log('===== starting scheduled channel cleanup =====');
+  const allowedCategories = ['🪂 SORTIES', '🏃Sorties pas rapente'];
   const guild = client.guilds.cache.get(process.env.GUILD_ID);
   const categories = guild.channels.cache.filter(channel => allowedCategories.includes(channel.name))
 
@@ -9,7 +12,7 @@ export function channelCleanup(client) {
 
   // do nothing for these format for now, too risky
   const forbidden1 = /(\d{1,2})-(\d{1,2})-(\d{1,2})/ // 04-05-06
-  const forbidden2 = /(janvier|fevrier|mars|avril|mai|juin|juillet|septembre|octobre|novembre|decembre)/ // 04-05-juin
+  const forbidden2 = /-(janvier|fevrier|mars|avril|mai|juin|juillet|septembre|octobre|novembre|decembre)-/ // 04-05-juin-word
 
   categories.forEach(category => {
     const today = new Date()
@@ -23,7 +26,8 @@ export function channelCleanup(client) {
             return
         }
 
-        let channel_date = new Date(today.getFullYear(), (parseInt(match[2]) - 1), (parseInt(match[1]) + 1));
+        // archive channel 24 hours after actual expiry date. E.g. 18-05-plop will be archived on 20-05 at 1am
+        let channel_date = new Date(today.getFullYear(), (parseInt(match[2]) - 1), (parseInt(match[1]) + 2));
 
         if (today > channel_date) {
             console.log(`${channel.name} too old, archiving !`);
