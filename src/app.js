@@ -1,6 +1,6 @@
-import { } from 'dotenv/config';
-import fs from 'fs';
-import { Client, GatewayIntentBits } from 'discord.js';
+require('dotenv').config();
+const fs = require('fs');
+const { Client, GatewayIntentBits } = require('discord.js');
 
 // Create a new Client with the Guilds intent
 const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMembers] });
@@ -12,7 +12,7 @@ const events = fs
 
 for (let event of events) {
 
-	const eventFile = await import(`./events/${event}`);
+	const eventFile = require(`./events/${event}`);
 
 	if (eventFile.once)
 		client.once(eventFile.name, (...args) => {

@@ -1,6 +1,6 @@
-import { EmbedBuilder } from 'discord.js';
+const { EmbedBuilder } = require('discord.js');
 
-export async function serverStats(client) {
+async function serverStats(client) {
   console.log('===== starting scheduled server stats update =====');
   const guild = client.guilds.cache.get(process.env.GUILD_ID);
 
@@ -61,3 +61,5 @@ export async function serverStats(client) {
 	} ;
   console.log('Server stats updated');
 }
+
+module.exports = { serverStats };

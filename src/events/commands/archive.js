@@ -1,7 +1,7 @@
 // TODO -> Archive by transforming channel into a thread in the 'archives' channel
 
-import { SlashCommandBuilder } from 'discord.js';
-import {archive}from '../../utils/archive.js';
+const { SlashCommandBuilder }  = require('discord.js');
+const {archive} = require('../../utils/archive.js');
 
 // Creates an Object in JSON with the data required by Discord's API to create a SlashCommand
 const create = () => {
@@ -27,4 +27,4 @@ const create = () => {
 	};
 };
 
-export { create, invoke };
+module.exports = { create, invoke };

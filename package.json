@@ -7,7 +7,10 @@
 	"author": "Nicolas Bertin",
 	"license": "MIT",
 	"dependencies": {
-		"discord.js": "^14.11.0",
+		"@discordjs/builders": "^1.8.1",
+		"@discordjs/rest": "^2.3.0",
+		"discord-api-types": "^0.37.84",
+		"discord.js": "^14.15.2",
 		"dotenv": "^16.3.1",
 		"path": "^0.12.7",
 		"puppeteer": "^15.5.0"
@@ -20,7 +23,6 @@
 		"dev": "nodemon src/app.js",
 		"start": "node src/app.js"
 	},
-	"type": "module",
 	"devDependencies": {
 		"nodemon": "^3.1.0"
 	}

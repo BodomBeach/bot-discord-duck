@@ -1,6 +1,6 @@
-import {archive} from '../utils/archive.js';
+const {archive} = require('../utils/archive.js');
 
-export function channelCleanup(client) {
+function channelCleanup(client) {
 
 
   console.log('===== starting scheduled channel cleanup =====');
@@ -38,3 +38,5 @@ export function channelCleanup(client) {
     });
   });
 }
+
+module.exports = { channelCleanup };

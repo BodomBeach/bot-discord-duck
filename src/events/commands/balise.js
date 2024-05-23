@@ -1,5 +1,5 @@
-import { SlashCommandBuilder, AttachmentBuilder, EmbedBuilder } from 'discord.js';
-import puppeteer from 'puppeteer';
+const { SlashCommandBuilder, AttachmentBuilder, EmbedBuilder } = require('discord.js');
+const puppeteer = require('puppeteer');
 
 const url = 'http://www.murblanc.org/sthil';
 
@@ -65,4 +65,4 @@ const getScreenhot = async (selector) => {
 	return screenshot;
   }
 
-export { create, invoke };
+module.exports = { create, invoke };
