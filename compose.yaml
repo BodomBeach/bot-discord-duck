@@ -5,3 +5,4 @@ services:
     restart: unless-stopped
     volumes:
       - .:/app
+  db:
