@@ -7,21 +7,21 @@ const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBit
 
 // Loading all events
 const events = fs
-	.readdirSync('src/events')
-	.filter((file) => file.endsWith('.js'));
+  .readdirSync('src/events')
+  .filter((file) => file.endsWith('.js'));
 
 for (let event of events) {
 
-	const eventFile = require(`./events/${event}`);
+  const eventFile = require(`./events/${event}`);
 
-	if (eventFile.once)
-		client.once(eventFile.name, (...args) => {
-			eventFile.invoke(...args);
-		});
-	else
-		client.on(eventFile.name, (...args) => {
-			eventFile.invoke(...args);
-		});
+  if (eventFile.once)
+    client.once(eventFile.name, (...args) => {
+      eventFile.invoke(...args);
+    });
+  else
+    client.on(eventFile.name, (...args) => {
+      eventFile.invoke(...args);
+    });
 };
 
 client.login(process.env.BOT_TOKEN);

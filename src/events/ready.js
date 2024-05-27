@@ -8,9 +8,9 @@ const name = 'ready';
 
 async function invoke(client) {
 
-	// start regular jobs
-	setInterval(() => {channelCleanup(client)}, process.env.CHANNEL_CLEANUP_INTERVAL || 3600000); // every hour
-	setInterval(() => {serverStats(client)}, process.env.STATS_INTERVAL || 600000); // every 10 min
+  // start regular jobs
+  setInterval(() => { channelCleanup(client) }, process.env.CHANNEL_CLEANUP_INTERVAL || 3600000); // every hour
+  setInterval(() => { serverStats(client) }, process.env.STATS_INTERVAL || 600000); // every 10 min
 
   const commands = []
   const commandFiles = fs.readdirSync('./src/events/commands').filter(file => file.endsWith('.js'));
@@ -21,7 +21,7 @@ async function invoke(client) {
   }
   registerCommands(client, commands)
 
-	console.log(`Successfully logged to Discord as ${client.user.tag}!`);
+  console.log(`Successfully logged to Discord as ${client.user.tag}!`);
 
 }
 
