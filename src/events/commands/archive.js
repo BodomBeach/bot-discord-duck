@@ -7,7 +7,7 @@ const {archive} = require('../../utils/archive.js');
 const create = () => {
 	const command = new SlashCommandBuilder()
 		.setName('archive')
-		.setDescription('Archive ce salon')
+		.setDescription('Archive ce salon (fonctionne uniquement sur les salons sorties/compétitions/événements)')
     return command.toJSON();
   };
 
