@@ -1,0 +1,26 @@
+name: Deploy to Staging
+on:
+  push:
+    branches:
+      - staging
+  pull_request:
+    branches:
+      - staging
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: deploy
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: ${{ secrets.PORT }}
+          script: |
+            cd ~/bot-discord-duck.staging
+            git pull
+            docker system prune -f
+            docker compose down
+            docker compose -f compose.yaml -f compose.prod.yaml up --build -d
