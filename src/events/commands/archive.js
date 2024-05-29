@@ -5,19 +5,11 @@ const { archive } = require('../../utils/archive.js');
 
 // Creates an Object in JSON with the data required by Discord's API to create a SlashCommand
 const create = () => {
-<<<<<<< HEAD
-  const command = new SlashCommandBuilder()
-    .setName('archive')
-    .setDescription('Archive ce salon')
-  return command.toJSON();
-};
-=======
 	const command = new SlashCommandBuilder()
 		.setName('archive')
 		.setDescription('Archive ce salon (fonctionne uniquement sur les salons sorties/compétitions/événements)')
     return command.toJSON();
   };
->>>>>>> feature-licence
 
 // Called by the interactionCreate event listener when the corresponding command is invoked
 const invoke = async (interaction) => {
