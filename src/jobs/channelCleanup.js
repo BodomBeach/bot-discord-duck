@@ -2,7 +2,6 @@ const { archive } = require('../utils/archive.js');
 
 function channelCleanup(client) {
 
-
   console.log('===== starting scheduled channel cleanup =====');
   const allowedCategories = ['🪂 SORTIES', '🏃Sorties pas rapente'];
   const guild = client.guilds.cache.get(process.env.GUILD_ID);
@@ -12,7 +11,7 @@ function channelCleanup(client) {
 
   // do nothing for these format for now, too risky
   const forbidden1 = /(\d{1,2})-(\d{1,2})-(\d{1,2})/ // 04-05-06
-  const forbidden2 = /-(janvier|fevrier|mars|avril|mai|juin|juillet|septembre|octobre|novembre|decembre)-/ // 04-05-juin-word
+  const forbidden2 = /-(janvier|fevrier|mars|avril|mai|juin|juillet|septembre|octobre|novembre|decembre)-/ // 04-05-juin
 
   categories.forEach(category => {
     const today = new Date()

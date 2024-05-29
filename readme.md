@@ -6,6 +6,8 @@ Projet bénévole porté par les membres du club.
 
 ## Usage
 ### Commandes disponibles
+- `/help` - affiche un guide d'utilisation pour les nouveaux membres
+- `/licence` - permet au membre d'activer sa licence FFVL sur discord, lui donnant accès à tous les salons pour l'année en cours (gain du rôle "Licencié")
 - `/archive` - déplace le salon dans le bon dossier 📁ARCHIVES. Créé un nouveau dossier 📁ARCHIVES si besoin. Uniquement [Sorties/Événements/Compétitions]
 - `/balise`  - affiche les dernières valeurs et directions de vent autour de Grenoble. Source : [murblanc.org/sthil](https://murblanc.org/sthil)
 
@@ -15,13 +17,12 @@ Projet bénévole porté par les membres du club.
 
 ## Todo
 
-- Fonction qui manipule les rôles des membres pour afficher certains salons uniquement aux membres ayant cotisé au club pour l'année en cours
 - Commande `live` pour mettre de suivre les canards crosseurs sur une journée
-- Améliorer la commande `/archive` pour qu'elle transforme le salon en thread dans un unique salon `archives`, nous permettant alors de garder l'historique des sorties ad vitam aeternam (@Romain.L ?)
 - Commande `/notam` pour afficher toutes les NOTAM en cours entre 2 points GPS
-- ~~Fonction de covoiturage~~ -> abandonné, trop compliqué à mettre en oeuvre
+- Améliorer la commande `/archive` pour qu'elle transforme le salon en thread dans un unique salon `archives`, nous permettant alors de garder l'historique des sorties ad vitam aeternam (@Romain.L ?)
 - Ajouter un webhook qui notifie la création d'un nouvel article sur le site du Duck
 - Ajouter un salon `creation-sorties` où seul le bot peut écrire, pour les membres qui souhaitent recevoir une notification lorsqu'une nouvelle sortie est proposée
+- ~~Fonction de covoiturage~~ -> abandonné, trop compliqué à mettre en oeuvre
 
 ## Installation
 
