@@ -6,3 +6,4 @@ services:
     restart: unless-stopped
     volumes:
       - .:/app
+      - /app/node_modules # Avoid overwriting node_modules of main bind (.:/app)
