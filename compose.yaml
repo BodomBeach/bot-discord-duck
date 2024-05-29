@@ -1,6 +1,7 @@
 services:
   app:
-    build: .
+    build:
+      context: .
     command: npm run dev
     restart: unless-stopped
     volumes:
