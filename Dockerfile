@@ -13,13 +13,15 @@ RUN apt-get update && apt-get install gnupg wget -y && \
   rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
-RUN  chown -R node /app
-USER node
+RUN mkdir /db
+RUN  chown -R node:node /db
 
 COPY package.json package.json
 COPY package-lock.json package-lock.json
 RUN npm ci --include=dev
 
 COPY . .
+
+USER node
 
 CMD npm run dev

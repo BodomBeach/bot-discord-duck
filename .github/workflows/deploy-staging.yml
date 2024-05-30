@@ -23,4 +23,4 @@ jobs:
             git pull
             docker system prune -f
             docker compose down
-            docker compose -f compose.yaml -f compose.prod.yaml up --build -d
+            docker compose -f compose.prod.yaml up --build -d
