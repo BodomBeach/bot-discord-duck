@@ -19,14 +19,19 @@ const invoke = async (interaction) => {
   await interaction.deferReply({ ephemeral: true });
 
   const db = new sqlite3.Database('db/db.sqlite')
-
-  // params
   const username = interaction.user.username
   const licenseNumber = interaction.options.getString('numero_licence')
   const currentYear = new Date().getFullYear()
   const structureId = process.env.STRUCTURE_ID
+  const targetRole = interaction.guild.roles.cache.find(role => role.name == 'Licencié ' + currentYear)
 
   console.log(`${interaction.user.username} used /licence ${licenseNumber}`);
+
+  // Check if user already has role
+  if (interaction.member.roles.cache.hasAny(targetRole.id)) {
+    await interaction.editReply(`Tu as déjà le rôle **${targetRole}**. Reviens me voir l'année prochaine pour réactiver ta licence :wink:`);
+    return
+  }
 
   // Check if user already has a licence activated for current year
   const alreadyActivated = await asyncGet(db, 'SELECT * FROM licenses WHERE username = ? AND year = ?', [username, currentYear])
@@ -46,7 +51,7 @@ const invoke = async (interaction) => {
   console.log('FFVL response', response);
   if (response.data == 1) {
 
-    interaction.member.roles.add(interaction.guild.roles.cache.find(role => role.name == 'Licencié ' + currentYear))
+    await interaction.member.roles.add(interaction.guild.roles.cache.find(role => role.name == 'Licencié ' + currentYear))
     // Insert row into db
     db.run(`INSERT INTO licenses(username, license_number, year) VALUES(?, ?, ?);`, [username, licenseNumber, currentYear], function (err) {
       if (err) { console.log(err.message); }
@@ -66,10 +71,11 @@ const invoke = async (interaction) => {
 
 const successMessage = (year) => {
   return `
-Bien joué, ton numéro de licence a bien été activé :partying_face:
-Tu as désormais le rôle **Licencié ${year}** et tu a accès à tous les salons :duck:
+:white_check_mark: Bien joué, ton numéro de licence a bien été activé
 
-Voici quelques astuces pour t'aider à t'y retrouver dans le discord.
+:partying_face: Tu as désormais le rôle **Licencié ${year}** et tu a accès à tous les salons :duck:
+
+Voici quelques astuces pour t'aider à t'y retrouver dans le discord :arrow_down:
   `
 }
 

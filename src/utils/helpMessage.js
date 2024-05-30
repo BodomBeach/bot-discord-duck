@@ -13,7 +13,7 @@ class HelpMessage {
     const devbotChannel = await this.parseChannel('🤖dév-bots')
 
   return `
-:duck: **__Guide d'utilisation du discord__ ** :duck:
+:information_source:  **__Guide d'utilisation du discord__ **
 
 - Tu veux planifier une sortie future, c'est par ici ${regleChannel}
 - Tu décides d'aller voler au dernier moment (le jour même), pas besoin de créer un salon dédié, il suffit de poster un message dans ${spontChannel}
