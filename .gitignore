@@ -2,5 +2,5 @@ node_modules/
 .vscode/
 .env
 logs/app.log
-db/q
+db/
 tmp
