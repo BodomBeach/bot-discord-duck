@@ -18,7 +18,7 @@ const create = () => {
 const invoke = async (interaction) => {
   await interaction.deferReply({ ephemeral: true });
 
-  const db = new sqlite3.Database('db.sqlite')
+  const db = new sqlite3.Database('db/db.sqlite')
 
   // params
   const username = interaction.user.username
