@@ -73,7 +73,7 @@ const successMessage = (year) => {
   return `
 :white_check_mark: Bien joué, ton numéro de licence a bien été activé
 
-:partying_face: Tu as désormais le rôle **Licencié ${year}** et tu a accès à tous les salons :duck:
+:partying_face: Tu as désormais le rôle **${targetRole}** et tu a accès à tous les salons :duck:
 
 Voici quelques astuces pour t'aider à t'y retrouver dans le discord :arrow_down:
   `
