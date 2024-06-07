@@ -58,7 +58,7 @@ const invoke = async (interaction) => {
       console.log(`License succesfully activated for user ${username}`);
     });
 
-    await interaction.editReply({ content: successMessage(currentYear), ephemeral: true })
+    await interaction.editReply({ content: successMessage(currentYear, targetRole), ephemeral: true })
     const helpMessage = await new HelpMessage(interaction.guild).execute()
     await interaction.followUp({ content: helpMessage, ephemeral: true });
 
@@ -69,11 +69,11 @@ const invoke = async (interaction) => {
 
 };
 
-const successMessage = (year) => {
+const successMessage = (year, role) => {
   return `
 :white_check_mark: Bien joué, ton numéro de licence a bien été activé
 
-:partying_face: Tu as désormais le rôle **${targetRole}** et tu a accès à tous les salons :duck:
+:partying_face: Tu as désormais le rôle **${role}** et tu a accès à tous les salons :duck:
 
 Voici quelques astuces pour t'aider à t'y retrouver dans le discord :arrow_down:
   `
