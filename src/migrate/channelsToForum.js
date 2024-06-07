@@ -36,7 +36,7 @@ client.once('ready', async () => {
   try {
     for (const channel of textChannels.values()) {
 
-      if (channel.name !== '38-alpes-dhuez') continue
+      // if (channel.name !== '38-alpes-dhuez') continue
 
       let messages = await channel.messages.fetch({ limit: 100 }).then(messages => {
         console.log(`${channel.name} : ${messages.size} messages`);
