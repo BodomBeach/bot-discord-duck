@@ -16,7 +16,7 @@ async function invoke(client) {
   // start regular jobs
   setInterval(() => { channelCleanup(client) }, process.env.CHANNEL_CLEANUP_INTERVAL || 3600000); // every hour
   setInterval(() => { serverStats(client) }, process.env.STATS_INTERVAL || 600000); // every 10 min
-  setInterval(() => { refreshBalise(client) }, process.env.BALISE_INTERVAL || 60000); // every 10 min
+  setInterval(() => { refreshBalise(client) }, process.env.BALISE_INTERVAL || 600000); // every 10 min
 
   const commands = []
   const commandFiles = fs.readdirSync('./src/events/commands').filter(file => file.endsWith('.js'));
