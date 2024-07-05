@@ -10,8 +10,9 @@ Projet bénévole porté par les membres du club.
 - `/balise`  - affiche les dernières valeurs et directions de vent autour de Grenoble. Source : [murblanc.org/sthil](https://murblanc.org/sthil)
 
 ### Jobs automatiques
-- `every hour`  - archive les salons périmés des catégories [Sorties] (uniquement si le format de date est valide, e.g. 28-02-chamrousse)
-- `every 10 min` - met à jour les stats du serveur dans le salon `ADMIN > STATS`
+- `Toutes les heures`  - archive les salons périmés des catégories [Sorties] (uniquement si le format de date est valide, e.g. 28-02-chamrousse)
+- `Toutes les 10min` - met à jour les stats du serveur dans le salon `ADMIN > STATS`
+- `À chaque création de salon` - si le nombre de salons total est supérieur à 498, supprime automatiquement l'archive la plus vieille pour ne jamais atteindre la limite native de 500 salons.
 
 ## Todo
 
@@ -19,7 +20,6 @@ Projet bénévole porté par les membres du club.
 - Commande `live` pour mettre de suivre les canards crosseurs sur une journée
 - Améliorer la commande `/archive` pour qu'elle transforme le salon en thread dans un unique salon `archives`, nous permettant alors de garder l'historique des sorties ad vitam aeternam (@Romain.L ?)
 - Commande `/notam` pour afficher toutes les NOTAM en cours entre 2 points GPS
-- ~~Fonction de covoiturage~~ -> abandonné, trop compliqué à mettre en oeuvre
 - Ajouter un webhook qui notifie la création d'un nouvel article sur le site du Duck
 - Ajouter un salon `creation-sorties` où seul le bot peut écrire, pour les membres qui souhaitent recevoir une notification lorsqu'une nouvelle sortie est proposée
 
