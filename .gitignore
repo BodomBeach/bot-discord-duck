@@ -1,5 +1,6 @@
 node_modules/
 .vscode/
 .env
+tmp
 logs/app.log
 db.sqlite
