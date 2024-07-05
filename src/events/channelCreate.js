@@ -6,38 +6,38 @@ async function invoke(channel) {
     const guild = channel.guild;
     const allChannels = guild.channels.cache;
 
-    // Check if the channel limit (500) is reached
-    if ((allChannels.size > 498)) {
+    // Check if the channel limit (500) is reached, with a margin of 2
+    if (allChannels.size >= 498) {
       const oldestArchiveCategory = channel.guild.channels.cache
         .filter(
           (channel) =>
             channel.type === 4 &&
             channel.name.slice(0, 11).toLowerCase() === "📁archives_"
         )
-        .sort((channel) => parseInt(channel.name.split("_")[1]))
-        .first();
+        .last();
 
       if (oldestArchiveCategory) {
         const oldestChannel = oldestArchiveCategory.children.cache
-          .sort((channel) => channel.position)
-          .first();
+          .sort((a, b) => a.position - b.position)
+          .last();
 
         console.log(
           `Making room - delete oldest archive channel ${oldestChannel.name}`
         );
-
         await oldestChannel.delete();
 
-        // If the category is now empty, delete the category too
-        if (oldestArchiveCategory.children.size === 0) {
+        // If the category is now empty, delete it
+        if (oldestArchiveCategory.children.cache.size === 0) {
+          // not zero because cache is not refreshed yet
           console.log(`Delete empty category ${oldestArchiveCategory.name}`);
-          await category.delete();
+          await oldestArchiveCategory.delete();
         }
       }
     }
   } catch (error) {
     console.log(error);
   }
+  return;
 }
 
 module.exports = { once, name, invoke };
