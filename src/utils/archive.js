@@ -5,13 +5,11 @@ async function archive(channel) {
       channel.type === 4 &&
       channel.name.slice(0, 11).toLowerCase() === "📁archives_"
   );
-  const latestCategory = channel.guild.channels.cache
-    .filter(
-      (channel) =>
-        channel.type === 4 &&
-        channel.name.slice(0, 11).toLowerCase() === "📁archives_"
+  const latestCategory = archiveCategories
+    .filter((channel) => channel.children.cache.size < 3)
+    .sort(
+      (a, b) => parseInt(a.name.split("_")[1]) - parseInt(b.name.split("_")[1])
     )
-    .sort((channel) => parseInt(channel.name.split("_")[1]))
     .last();
 
   if (latestCategory) {
@@ -21,12 +19,12 @@ async function archive(channel) {
     const count = Math.max(
       ...archiveCategories.map((cat) => parseInt(cat.name.split("_")[1]))
     );
-    latestCategory = await channel.guild.channels.create({
+    let newCategory = await channel.guild.channels.create({
       name: `📁ARCHIVES_${count + 1}`,
       type: 4,
     });
-    console.log("Created new archive latestCategory");
-    channel.setParent(available_archive);
+    console.log(`Created new archive category ${newCategory.name}`);
+    channel.setParent(newCategory);
   }
 }
 
