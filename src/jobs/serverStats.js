@@ -1,7 +1,6 @@
 const { EmbedBuilder } = require("discord.js");
 
 async function serverStats(client) {
-  console.log("===== starting scheduled server stats update =====");
   const guild = client.guilds.cache.get(process.env.GUILD_ID);
 
   // fetch members first, otherwise guild.roles.cache.get('1232623387965132820').members.size will be empty
@@ -70,7 +69,6 @@ async function serverStats(client) {
   } else {
     messages.first().edit({ embeds: [embed] });
   }
-  console.log("Server stats updated");
 }
 
 module.exports = { serverStats };

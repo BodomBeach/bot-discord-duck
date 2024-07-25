@@ -1,13 +1,13 @@
 const { archive } = require("../utils/archive.js");
 
 async function channelCleanup(client) {
-  console.log("===== starting scheduled channel cleanup =====");
-
   const allowedCategories = ["🪂 SORTIES", "🏃Sorties pas rapente"];
   const guild = client.guilds.cache.get(process.env.GUILD_ID);
   const categories = guild.channels.cache.filter((channel) =>
     allowedCategories.includes(channel.name)
   );
+
+  let invalidChannelsCount = 0;
 
   const allowed = /(\d{1,2})-(\d{1,2})/;
 
@@ -29,7 +29,7 @@ async function channelCleanup(client) {
         forbidden1.exec(channel.name) ||
         forbidden2.exec(channel.name)
       ) {
-        console.log(`format invalide ${channel.name}`);
+        invalidChannelsCount++;
         continue;
       }
 
@@ -48,6 +48,9 @@ async function channelCleanup(client) {
       }
     }
   }
+  console.log(
+    `${invalidChannelsCount} channels ignored (invalid title, cannot archive)`
+  );
 }
 
 module.exports = { channelCleanup };
