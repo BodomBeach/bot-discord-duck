@@ -7,14 +7,18 @@ async function invoke(channel) {
     const allChannels = guild.channels.cache;
 
     // Check if the channel limit (500) is reached, with a margin of 2
-    if (allChannels.size >= 498) {
+    if (allChannels.size >= 495) {
       const oldestArchiveCategory = channel.guild.channels.cache
         .filter(
           (channel) =>
             channel.type === 4 &&
             channel.name.slice(0, 11).toLowerCase() === "📁archives_"
         )
-        .last();
+        .sort(
+          (a, b) =>
+            parseInt(a.name.split("_")[1]) - parseInt(b.name.split("_")[1])
+        )
+        .first();
 
       if (oldestArchiveCategory) {
         const oldestChannel = oldestArchiveCategory.children.cache

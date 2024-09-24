@@ -14,8 +14,18 @@ async function archive(channel) {
 
   if (latestCategory) {
     await channel.setParent(latestCategory);
+
+    // Reorder channels by name
+    const sortedChannels = latestCategory.children.cache.sort((a, b) =>
+      b.name.localeCompare(a.name)
+    );
+    let position = 0;
+    for (const channel of sortedChannels.values()) {
+      await channel.setPosition(position);
+      position++;
+    }
   } else {
-    // creating a new archive folder
+    // Create a new archive category
     const count = Math.max(
       ...archiveCategories.map((cat) => parseInt(cat.name.split("_")[1]))
     );
@@ -23,6 +33,11 @@ async function archive(channel) {
       name: `📁ARCHIVES_${count + 1}`,
       type: 4,
     });
+
+    // Position this new category at the top
+    await newCategory.setPosition(
+      Math.min(...archiveCategories.map((x) => x.position))
+    );
     console.log(`Created new archive category ${newCategory.name}`);
     await channel.setParent(newCategory);
   }
