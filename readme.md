@@ -1,18 +1,21 @@
 # Bot discord du Duck-parapente
 
-Bot utilisant l'API  [discord.js](https://discord.js.org/) pour intéragir avec le serveur discord du Duck.
+Bot utilisant l'API [discord.js](https://discord.js.org/) pour intéragir avec le serveur discord du Duck.
 
 Projet bénévole porté par les membres du club.
 
 ## Usage
+
 ### Commandes disponibles
+
 - `/archive` - déplace le salon dans le bon dossier 📁ARCHIVES. Créé un nouveau dossier 📁ARCHIVES si besoin. Uniquement [Sorties/Événements/Compétitions]
-- `/balise`  - affiche les dernières valeurs et directions de vent autour de Grenoble. Source : [murblanc.org/sthil](https://murblanc.org/sthil)
+- `/balise` - affiche les dernières valeurs et directions de vent autour de Grenoble. Source : [murblanc.org/sthil](https://murblanc.org/sthil)
 
 ### Jobs automatiques
-- `Toutes les heures`  - archive les salons périmés des catégories [Sorties] (uniquement si le format de date est valide, e.g. 28-02-chamrousse)
+
+- `Toutes les heures` - Archive les salons périmés des catégories [Sorties] (avec une tolérance de 1 jour, exemple : 28-02-chamrousse sera archivé automatiquement le 30-09 à 1h du matin). Fonctionne uniquement pour les salons ayant un nom valide (28-02-chamrousse)
+- `À chaque création de salon` - si le nombre de salons total est supérieur à 495, supprime automatiquement l'archive la plus vieille pour ne jamais atteindre la limite native de 500 salons.
 - `Toutes les 10min` - met à jour les stats du serveur dans le salon `ADMIN > STATS`
-- `À chaque création de salon` - si le nombre de salons total est supérieur à 498, supprime automatiquement l'archive la plus vieille pour ne jamais atteindre la limite native de 500 salons.
 
 ## Todo
 
@@ -29,12 +32,14 @@ Projet bénévole porté par les membres du club.
 
 - Installer docker et docker-compose
 - Créer un fichier `.env` à la racine en suivant cet exemple :
+
 ```bash
 GUILD_ID=ID_DU_SERVEUR
 BOT_TOKEN=TOKEN_DU_BOT
 ```
 
 ### CLI
+
 ```bash
 docker compose up --build
 ```

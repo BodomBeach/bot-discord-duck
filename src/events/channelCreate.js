@@ -6,7 +6,7 @@ async function invoke(channel) {
     const guild = channel.guild;
     const allChannels = guild.channels.cache;
 
-    // Check if the channel limit (500) is reached, with a margin of 2
+    // If too close to channel limit (500), destroy oldest archive
     if (allChannels.size >= 495) {
       const oldestArchiveCategory = channel.guild.channels.cache
         .filter(
