@@ -47,7 +47,6 @@ const invoke = async (interaction) => {
   }
   console.log(`https://data.ffvl.fr/php/verif_lic_adh.php?num=${licenseNumber}&stru=${structureId}`);
   const response = await axios.get(`https://data.ffvl.fr/php/verif_lic_adh.php?num=${licenseNumber}&stru=${structureId}`)
-  console.log('FFVL response', response);
   if (response.data == 1) {
 
     await interaction.member.roles.add(interaction.guild.roles.cache.find(role => role.name == 'Licencié ' + currentYear))
