@@ -53,7 +53,12 @@ async function serverStats(client) {
         inline: true,
       },
       {
-        name: "Nombre de salons",
+        name: 'Licencié 2025',
+        value: guild.roles.cache.find(role => role.name === 'Licencié 2025')?.members?.size?.toString() || '0',
+        inline: true,
+      },
+      {
+        name: 'Nombre de salons',
         value: guild.channels.cache.size.toString(),
       },
     ]);

@@ -9,11 +9,13 @@
 	"dependencies": {
 		"@discordjs/builders": "^1.8.1",
 		"@discordjs/rest": "^2.3.0",
+		"axios": "^1.7.2",
 		"discord-api-types": "^0.37.84",
 		"discord.js": "^14.15.2",
 		"dotenv": "^16.3.1",
 		"path": "^0.12.7",
-		"puppeteer": "^15.5.0"
+		"puppeteer": "^15.5.0",
+		"sqlite3": "^5.1.7"
 	},
 	"imports": {
 		"#events/*": "./events/*",

@@ -3,4 +3,7 @@ node_modules/
 .env
 tmp
 logs/app.log
-db.sqlite
+tmp
+db/*
+backups/*
+backup_log.txt

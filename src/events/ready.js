@@ -2,6 +2,7 @@ const fs = require('fs');
 const { serverStats } = require('../jobs/serverStats.js');
 const { channelCleanup } = require('../jobs/channelCleanup.js');
 const registerCommands = require('../utils/registerCommands.js');
+require('../utils/initDb.js')
 
 const once = true;
 const name = 'ready';

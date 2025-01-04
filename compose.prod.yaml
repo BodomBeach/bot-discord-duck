@@ -1,5 +1,10 @@
 services:
   app:
+    build:
+      context: .
     command: npm run start
+    restart: unless-stopped
     environment:
       - NODE_ENV=production
+    volumes:
+      - ./db:/app/db
