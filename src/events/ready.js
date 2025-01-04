@@ -2,15 +2,12 @@ const fs = require('fs');
 const { serverStats } = require('../jobs/serverStats.js');
 const { channelCleanup } = require('../jobs/channelCleanup.js');
 const registerCommands = require('../utils/registerCommands.js');
-const {initMessages} = require('../utils/initMessages.js')
 require('../utils/initDb.js')
 
 const once = true;
 const name = 'ready';
 
 async function invoke(client) {
-
-  initMessages(client);
 
   // start regular jobs
   setInterval(() => { channelCleanup(client) }, process.env.CHANNEL_CLEANUP_INTERVAL || 3600000); // every hour
