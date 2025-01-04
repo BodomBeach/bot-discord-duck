@@ -23,10 +23,7 @@ Exemple : **\`/licence\` \`0315897E\`**
 Notre bot vérifiera que ta cotisation est à jour et te donnera accès au reste des salons !
 Si tu rencontres un problème, n'hésite pas à contacter un admin du serveur.
 `
-  console.log(client.channels.cache);
-  
   const welcomeChannel = client.channels.cache.find(channel => channel.name === 'bienvenue');
-
 
   let messages = await welcomeChannel.messages.fetch({ limit: 1 });
 
