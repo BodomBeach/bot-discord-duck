@@ -1,5 +1,4 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
-const { HelpMessage } = require('../../utils/helpMessage.js');
 const axios = require('axios');
 const sqlite3 = require('sqlite3').verbose();
 
@@ -29,14 +28,14 @@ const invoke = async (interaction) => {
 
   // Check if user already has role
   if (interaction.member.roles.cache.hasAny(targetRole.id)) {
-    await interaction.editReply(`Tu as déjà le rôle **${targetRole}**. Reviens me voir l'année prochaine pour réactiver ta licence :wink:`);
+    await interaction.editReply(`Tu as déjà le rôle **${targetRole}** :wink:`);
     return
   }
 
   // Check if user already has a licence activated for current year
   const alreadyActivated = await asyncGet(db, 'SELECT * FROM licenses WHERE username = ? AND year = ?', [username, currentYear])
   if (alreadyActivated) {
-    await interaction.editReply(`Ton compte Discord est déjà associé à la licence **${alreadyActivated.license_number}**. En cas de problème, tu peux contacter un admin.`);
+    await interaction.editReply(`Ton compte Discord est déjà associé à la licence **${alreadyActivated.license_number}**. En cas de problème, tu peux contacter un admin (ceux qui ont un pseudo couleur rouge).`);
     return
   }
 
@@ -58,9 +57,7 @@ const invoke = async (interaction) => {
       console.log(`License succesfully activated for user ${username}`);
     });
 
-    await interaction.editReply({ content: successMessage(currentYear, targetRole), ephemeral: true })
-    const helpMessage = await new HelpMessage(interaction.guild).execute()
-    await interaction.followUp({ content: helpMessage, ephemeral: true });
+    await interaction.editReply({ content: successMessage(interaction, currentYear, targetRole), ephemeral: true })
 
   } else {
     console.log(`License not found ${username}`);
@@ -69,13 +66,12 @@ const invoke = async (interaction) => {
 
 };
 
-const successMessage = (year, role) => {
+const successMessage = (interaction, year, role) => {
+  const guideChannel = interaction.guild.channels.cache.find(channel => channel.name === 'guide-discord')
   return `
-:white_check_mark: Bien joué, ton numéro de licence a bien été activé
-
-:partying_face: Tu as désormais le rôle **${role}** et tu a accès à tous les salons :duck:
-
-Voici quelques astuces pour t'aider à t'y retrouver dans le discord :arrow_down:
+:white_check_mark: Bien joué, ton numéro de licence a bien été activé :partying_face: 
+Tu as désormais le rôle **${role}** et tu as accès à tous les salons pour l'année ${year} :duck:
+Pour t'aider à t'y retrouver dans le discord, on te recommande de lire ce petit guide ${guideChannel}
   `
 }
 

@@ -4,4 +4,6 @@ node_modules/
 tmp
 logs/app.log
 tmp
-db/
+db/*
+backups/*
+backup_log.txt

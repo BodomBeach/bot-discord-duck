@@ -5,7 +5,7 @@ async function initMessages(client) {
 **Bienvenue sur le serveur discord du Duck :duck:**
 
 Ce serveur discord est là pour nous permettre de planifier et d'organiser des sorties, événements club et compétitions.
-C'est aussi un endroit où l'on peut discuter de tous les sujets qui concernent le club, le parapente et plus encore !
+C'est aussi un endroit où l'on peut discuter de tous les sujets qui concernent le club, le parapente et plus encore.
 
 Avant toute chose, nous t'invitons à compléter les 2 étapes ci-dessous pour profiter pleinement du discord.
 
@@ -17,13 +17,17 @@ Voilà comment faire :
 
 **__2 - Active ta licence__**
 Pour avoir accès à tous les salons, tu dois avoir cotisé au Duck pour l'année en cours et activer ta licence FFVL sur discord.
-Pour cela, il suffit de taper la commande **\`/licence\`** suivi de ton [numéro de licence FFVL](https://intranet.ffvl.fr) :
+Pour cela, il suffit de taper, dans n'importe quel salon, la commande **\`/licence\`** suivi de ton [numéro de licence FFVL](https://intranet.ffvl.fr) :
 Exemple : **\`/licence\` \`0315897E\`**
 
 Notre bot vérifiera que ta cotisation est à jour et te donnera accès au reste des salons !
 Si tu rencontres un problème, n'hésite pas à contacter un admin du serveur.
 `
-  const welcomeChannel = client.channels.cache.find(channel => channel.name === 'bienvenue-et-regles');
+  console.log(client.channels.cache);
+  
+  const welcomeChannel = client.channels.cache.find(channel => channel.name === 'bienvenue');
+
+
   let messages = await welcomeChannel.messages.fetch({ limit: 1 });
 
   // Create or edit existing embed

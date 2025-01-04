@@ -6,7 +6,6 @@ Projet bénévole porté par les membres du club.
 
 ## Usage
 ### Commandes disponibles
-- `/help` - affiche un guide d'utilisation pour les nouveaux membres
 - `/licence` - permet au membre d'activer sa licence FFVL sur discord, lui donnant accès à tous les salons pour l'année en cours (gain du rôle "Licencié")
 - `/archive` - déplace le salon dans le bon dossier 📁ARCHIVES. Créé un nouveau dossier 📁ARCHIVES si besoin. Uniquement [Sorties/Événements/Compétitions]
 - `/balise`  - affiche les dernières valeurs et directions de vent autour de Grenoble. Source : [murblanc.org/sthil](https://murblanc.org/sthil)
