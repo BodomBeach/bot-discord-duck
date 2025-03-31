@@ -66,7 +66,7 @@ const invoke = async (interaction) => {
 };
 
 const successMessage = (interaction, year, role) => {
-  const guideChannel = interaction.guild.channels.cache.find(channel => channel.name === 'guide-discord')
+  const guideChannel = interaction.guild.channels.cache.find(channel => channel.name === '📋guide-discord')
   return `
 :white_check_mark: Bien joué, ton numéro de licence a bien été activé :partying_face: 
 Tu as désormais le rôle **${role}** et tu as accès à tous les salons pour l'année ${year} :duck:

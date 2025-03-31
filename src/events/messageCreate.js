@@ -3,7 +3,7 @@ const name = 'messageCreate';
 
 async function invoke(interaction) {
 
-  const welcomeChannel = interaction.guild.channels.cache.find(channel => channel.name === 'bienvenue-et-regles');
+  const welcomeChannel = interaction.guild.channels.cache.find(channel => channel.name === 'bienvenue');
 
   // Ignore messages from bots and super admin
   if (interaction.author.bot) return;
