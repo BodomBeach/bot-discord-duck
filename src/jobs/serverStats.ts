@@ -73,10 +73,13 @@ export async function serverStats(client: Client) {
     ]);
 
   const statsChannel = client.channels.cache.find(
-    (channel) => channel.isTextBased() && 'name' in channel && channel.name === "stats"
+    (channel) => channel.isTextBased() && 'name' in channel && channel.name === process.env.CHANNEL_STATS
   ) as TextChannel | undefined;
 
-  if (!statsChannel) return;
+  if (!statsChannel) {
+    console.error(`Stats channel "${process.env.CHANNEL_STATS}" not found`);
+    return;
+  }
 
   let messages = await statsChannel.messages.fetch({ limit: 1 });
 
