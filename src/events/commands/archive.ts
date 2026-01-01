@@ -1,10 +1,10 @@
 // TODO -> Archive by transforming channel into a thread in the 'archives' channel
 
-const { SlashCommandBuilder } = require("discord.js");
-const { archive } = require("../../utils/archive.js");
+import { SlashCommandBuilder, ChatInputCommandInteraction, TextChannel } from "discord.js";
+import { archive } from "../../utils/archive.js";
 
 // Creates an Object in JSON with the data required by Discord's API to create a SlashCommand
-const create = () => {
+export const create = () => {
   const command = new SlashCommandBuilder()
     .setName("archive")
     .setDescription("Archive ce salon");
@@ -12,26 +12,26 @@ const create = () => {
 };
 
 // Called by the interactionCreate event listener when the corresponding command is invoked
-const invoke = async (interaction) => {
+export const invoke = async (interaction: ChatInputCommandInteraction) => {
   console.log(
-    `${interaction.user.username} used /archive on ${interaction.channel.name}`
+    `${interaction.user.username} used /archive on ${interaction.channel?.name}`
   );
 
   const allowedCategories = [
-    "🪂 SORTIES",
-    "🏃Sorties pas rapente",
-    "🏆 Compétitions",
+    process.env.CATEGORY_SORTIES,
+    process.env.CATEGORY_SORTIES_PAS_RAPENTE,
+    process.env.CATEGORY_COMPETITIONS,
+    process.env.CATEGORY_EVENEMENTS,
   ];
-  if (!allowedCategories.includes(interaction.channel.parent.name)) {
+  const channel = interaction.channel as TextChannel;
+  if (!channel.parent || !allowedCategories.includes(channel.parent.name)) {
     return interaction.reply({
       content:
         "Seuls les salons sorties, évenements et compétitions peuvent être archivés !",
       ephemeral: true,
     });
   } else {
-    archive(interaction.channel);
+    archive(channel);
     await interaction.reply({ content: "Salon archivé !", ephemeral: true });
   }
 };
-
-module.exports = { create, invoke };

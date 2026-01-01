@@ -1,9 +1,10 @@
-const { EmbedBuilder } = require("discord.js");
+import { EmbedBuilder, Client, TextChannel } from "discord.js";
 
-async function serverStats(client) {
-  const guild = client.guilds.cache.get(process.env.GUILD_ID);
+export async function serverStats(client: Client) {
+  const guild = client.guilds.cache.get(process.env.GUILD_ID!);
+  if (!guild) return;
 
-  // fetch members first, otherwise guild.roles.cache.get('1232623387965132820').members.size will be empty
+  // fetch members first, otherwise guild.roles.cache.get(id).members.size will be empty
   let members = await guild.members.fetch();
   const time = new Date().toLocaleString("fr-FR", {
     weekday: "long",
@@ -15,6 +16,9 @@ async function serverStats(client) {
     second: "numeric",
     timeZone: "Europe/Paris",
   });
+
+  const currentYear = new Date().getFullYear();
+  const previousYear = currentYear - 1;
 
   const embed = new EmbedBuilder()
     .setTitle("Statistiques du serveur")
@@ -32,7 +36,7 @@ async function serverStats(client) {
         name: "Admins",
         value:
           guild.roles.cache
-            .find((role) => role.name === "admins")
+            .find((role) => role.name === process.env.ROLE_ADMINS)
             ?.members?.size?.toString() || "0",
         inline: true,
       },
@@ -40,7 +44,7 @@ async function serverStats(client) {
         name: "Staff",
         value:
           guild.roles.cache
-            .find((role) => role.name === "staff")
+            .find((role) => role.name === process.env.ROLE_STAFF)
             ?.members?.size?.toString() || "0",
         inline: true,
       },
@@ -48,13 +52,18 @@ async function serverStats(client) {
         name: "Biplaceurs",
         value:
           guild.roles.cache
-            .find((role) => role.name === "biplaceurs")
+            .find((role) => role.name === process.env.ROLE_BIPLACEURS)
             ?.members?.size?.toString() || "0",
         inline: true,
       },
       {
-        name: 'Licencié 2025',
-        value: guild.roles.cache.find(role => role.name === 'Licencié 2025')?.members?.size?.toString() || '0',
+        name: `Licencié ${previousYear}`,
+        value: guild.roles.cache.find(role => role.name === process.env.ROLE_LICENCIE_PREFIX + ' ' + previousYear)?.members?.size?.toString() || '0',
+        inline: true,
+      },
+      {
+        name: `Licencié ${currentYear}`,
+        value: guild.roles.cache.find(role => role.name === process.env.ROLE_LICENCIE_PREFIX + ' ' + currentYear)?.members?.size?.toString() || '0',
         inline: true,
       },
       {
@@ -64,16 +73,17 @@ async function serverStats(client) {
     ]);
 
   const statsChannel = client.channels.cache.find(
-    (channel) => channel.name === "stats"
-  );
+    (channel) => channel.isTextBased() && 'name' in channel && channel.name === "stats"
+  ) as TextChannel | undefined;
+
+  if (!statsChannel) return;
+
   let messages = await statsChannel.messages.fetch({ limit: 1 });
 
   // Create or edit existing embed
   if (messages.size === 0) {
     statsChannel.send({ embeds: [embed] });
   } else {
-    messages.first().edit({ embeds: [embed] });
+    messages.first()?.edit({ embeds: [embed] });
   }
 }
-
-module.exports = { serverStats };

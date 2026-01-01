@@ -2,7 +2,8 @@
 	"name": "canard-bot",
 	"version": "2.0.3",
 	"description": "Discord bot for Duck-parapente",
-	"main": "src/app.js",
+	"type": "module",
+	"main": "dist/app.js",
 	"keywords": [],
 	"author": "Nicolas Bertin",
 	"license": "MIT",
@@ -13,19 +14,17 @@
 		"discord-api-types": "^0.37.84",
 		"discord.js": "^14.15.2",
 		"dotenv": "^16.3.1",
-		"path": "^0.12.7",
 		"puppeteer": "^15.5.0",
 		"sqlite3": "^5.1.7"
 	},
-	"imports": {
-		"#events/*": "./events/*",
-		"#commands/*": "./events/commands/*.js"
-	},
 	"scripts": {
-		"dev": "nodemon src/app.js",
-		"start": "node src/app.js"
+		"build": "tsc",
+		"dev": "tsc --watch & nodemon --watch dist dist/app.js",
+		"start": "node dist/app.js"
 	},
 	"devDependencies": {
-		"nodemon": "^3.1.0"
+		"@types/node": "^25.0.3",
+		"nodemon": "^3.1.0",
+		"typescript": "^5.9.3"
 	}
 }

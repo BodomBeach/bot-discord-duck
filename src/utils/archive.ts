@@ -1,19 +1,20 @@
-// TODO -> Archive by transforming channel into a thread in the 'archives' channel
-async function archive(channel) {
+import { GuildChannel, CategoryChannel, ChannelType } from 'discord.js';
+
+export async function archive(channel: GuildChannel) {
   const archiveCategories = channel.guild.channels.cache.filter(
-    (channel) =>
-      channel.type === 4 &&
-      channel.name.slice(0, 11).toLowerCase() === "📁archives_"
+    (ch) =>
+      ch.type === ChannelType.GuildCategory &&
+      ch.name.slice(0, 11).toLowerCase() === "📁archives_"
   );
   const latestCategory = archiveCategories
     .sort(
       (a, b) => parseInt(a.name.split("_")[1]) - parseInt(b.name.split("_")[1])
     )
-    .last();
+    .last() as CategoryChannel | undefined;
 
   if (latestCategory && latestCategory.children.cache.size < 50) {
     await channel.setParent(latestCategory);
-    await channel.setPosition(0);
+    await (channel as any).setPosition(0);
   } else {
     // Create a new archive category
     const count = Math.max(
@@ -21,16 +22,15 @@ async function archive(channel) {
     );
     let newCategory = await channel.guild.channels.create({
       name: `📁ARCHIVES_${count + 1}`,
-      type: 4,
+      type: ChannelType.GuildCategory,
     });
 
     // Position this new category at the top
-    await newCategory.setPosition(
-      Math.min(...archiveCategories.map((x) => x.position))
-    );
+    const positions = archiveCategories
+      .filter((x): x is CategoryChannel => 'position' in x)
+      .map((x) => x.position);
+    await newCategory.setPosition(Math.min(...positions));
     console.log(`Created new archive category ${newCategory.name}`);
     await channel.setParent(newCategory);
   }
 }
-
-module.exports = { archive };

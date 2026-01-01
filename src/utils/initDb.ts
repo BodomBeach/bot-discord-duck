@@ -1,6 +1,5 @@
-const fs = require('fs');
-const path = require('path');
-const sqlite3 = require('sqlite3').verbose();
+import fs from 'fs';
+import sqlite3 from 'sqlite3';
 
 // Ensure the directory exists
 if (!fs.existsSync('db')) {
@@ -20,9 +19,10 @@ const db = new sqlite3.Database('db/db.sqlite', (err) => {
         CREATE TABLE IF NOT EXISTS licenses (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             username TEXT NOT NULL,
-            license_number TEXT UNIQUE NOT NULL,
+            license_number TEXT NOT NULL,
             year INTEGER NOT NULL,
-            created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+            created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+            UNIQUE(license_number, year)
         )
     `, (err) => {
       if (err) {

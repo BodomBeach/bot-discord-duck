@@ -7,3 +7,4 @@ tmp
 db/*
 backups/*
 backup_log.txt
+dist/
