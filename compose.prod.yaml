@@ -4,6 +4,8 @@ services:
       context: .
     command: npm run start
     restart: unless-stopped
+    env_file:
+      - .env
     environment:
       - NODE_ENV=production
     volumes:
