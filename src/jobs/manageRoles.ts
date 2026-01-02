@@ -1,8 +1,10 @@
-import { Client } from "discord.js";
+import { Client, ChannelType } from "discord.js";
 
 /**
  * Manage yearly license roles:
- * - Create current year role if it doesn't exist, copying permissions from previous year role
+ * - Create current year role if it doesn't exist
+ * - Copy permissions from previous year role to current year role
+ * - Copy categories permission overwrites from previous year role to current year role
  */
 export async function manageRoles(client: Client) {
   const guild = client.guilds.cache.get(process.env.GUILD_ID!);
@@ -35,7 +37,7 @@ export async function manageRoles(client: Client) {
 
   try {
     // Create the new role with the same permissions and color as the previous year. Place the new role just above the previous role in hierarchy.
-    await guild.roles.create({
+    const newRole = await guild.roles.create({
       name: currentRoleName,
       color: previousRole.color,
       permissions: previousRole.permissions,
@@ -46,6 +48,29 @@ export async function manageRoles(client: Client) {
     });
 
     console.log(`✓ Successfully created role: ${currentRoleName}`);
+
+    // Copy permission overwrites from previous role to new role on all categories
+    const categories = guild.channels.cache.filter(
+      channel => channel.type === ChannelType.GuildCategory
+    );
+
+    for (const [, category] of categories) {
+      const permissionOverwrites = category.permissionOverwrites.cache.get(previousRole.id);
+      if (!permissionOverwrites) continue;
+
+      try {
+        await category.permissionOverwrites.edit(newRole.id, {
+          ...Object.fromEntries([
+            ...permissionOverwrites.allow.toArray().map(p => [p, true]),
+            ...permissionOverwrites.deny.toArray().map(p => [p, false])
+          ])
+        }, { reason: `Copy permissions from ${previousRoleName} to ${currentRoleName}` });
+
+        console.log(`  ✓ Copied permissions to category: ${category.name}`);
+      } catch (err) {
+        console.error(`  ✗ Failed to copy permissions to category ${category.name}:`, err);
+      }
+    }
   } catch (error) {
     console.error(`Failed to create role ${currentRoleName}:`, error);
   }
