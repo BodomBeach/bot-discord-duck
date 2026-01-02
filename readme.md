@@ -9,14 +9,14 @@ Projet bénévole porté par les membres du club.
 ### Commandes disponibles
 
 - `/licence` - permet au membre d'activer sa licence FFVL sur discord, lui donnant accès à tous les salons pour l'année en cours (gain du rôle "Licencié")
-- `/archive` - déplace le salon dans le bon dossier 📁ARCHIVES. Créé un nouveau dossier 📁ARCHIVES si besoin. Uniquement [Sorties/Événements/Compétitions]
-- `/balise` - affiche les dernières valeurs et directions de vent autour de Grenoble. Source : [murblanc.org/sthil](https://murblanc.org/sthil)
+- `/archive` - déplace le salon dans le bon dossier 📁ARCHIVES. Créé un nouveau dossier 📁ARCHIVES si besoin (un dossier peut contenir 50 salons maximum). Fonctionne uniquement pour les catégories `Sorties`, `Événements` et `Compétitions`
 
 ### Jobs automatiques
 
-- `Toutes les heures` - Archive les salons périmés des catégories [Sorties] (avec une tolérance de 1 jour, exemple : 28-02-chamrousse sera archivé automatiquement le 30-09 à 1h du matin). Fonctionne uniquement pour les salons ayant un nom valide (28-02-chamrousse)
-- `À chaque création de salon` - si le nombre de salons total est supérieur à 495, supprime automatiquement l'archive la plus vieille pour ne jamais atteindre la limite native de 500 salons.
 - `Toutes les 10min` - met à jour les stats du serveur dans le salon `ADMIN > STATS`
+- `Toutes les heures` - Archive les salons périmés des catégories [Sorties] (avec une tolérance de 1 jour, exemple : `10-02-chamrousse` sera archivé automatiquement le 12 février à 1h du matin). Fonctionne uniquement pour les salons ayant un nom valide (`jour-mois-label`)
+- `Toutes les heures` - si le nombre de salons total est supérieur à 495, supprime automatiquement l'archive la plus vieille pour ne jamais atteindre la limite native de 500 salons imposée par Discord.
+- `Chaque début d'année` - créé un nouveau rôle (exemple: le 1er janvier 2026, crée `Licencié 2026`) avec les mêmes permissions que le rôle précedent.
 
 ## Todo
 

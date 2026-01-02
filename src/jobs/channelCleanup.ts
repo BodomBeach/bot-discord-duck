@@ -61,7 +61,7 @@ async function autoArchive(guild: Guild) {
 async function destroyOldestChannel(guild: Guild) {
   // If too close to channel limit (500), destroy oldest archive
   const allChannels = guild.channels.cache;
-  if (allChannels.size >= 138) {
+  if (allChannels.size >= 495) {
     const oldestArchiveCategory = guild.channels.cache
       .filter(
         (ch: any) =>
