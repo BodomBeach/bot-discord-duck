@@ -14,6 +14,7 @@
 		"discord-api-types": "^0.37.84",
 		"discord.js": "^14.15.2",
 		"dotenv": "^16.3.1",
+		"node-cron": "^4.2.1",
 		"puppeteer": "^15.5.0",
 		"sqlite3": "^5.1.7"
 	},
@@ -25,6 +26,7 @@
 	},
 	"devDependencies": {
 		"@types/node": "^25.0.3",
+		"@types/node-cron": "^3.0.11",
 		"nodemon": "^3.1.0",
 		"typescript": "^5.9.3"
 	}

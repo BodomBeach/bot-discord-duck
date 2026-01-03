@@ -1,7 +1,9 @@
 import fs from 'fs';
 import { Client } from 'discord.js';
+import cron from 'node-cron';
 import { serverStats } from '../jobs/serverStats.js';
 import { channelCleanup } from '../jobs/channelCleanup.js';
+import { monthlyWeatherMessage } from '../jobs/monthlyWeatherMessage.js';
 import registerCommands from '../utils/registerCommands.js';
 import '../utils/initDb.js';
 import type { Command } from '../types/index.js';
@@ -9,12 +11,20 @@ import { manageRoles } from '../jobs/manageRoles.js';
 
 export const once = true;
 export const name = 'ready';
+const TIMEZONE = 'Europe/Paris';
 
 export async function invoke(client: Client) {
-  // start regular jobs
-  setInterval(() => { channelCleanup(client) }, Number(process.env.CHANNEL_CLEANUP_INTERVAL) || 3600000); // every hour
-  setInterval(() => { serverStats(client) }, Number(process.env.STATS_INTERVAL) || 600000); // every 10 min
-  setInterval(() => { manageRoles(client) }, Number(process.env.MANAGE_ROLES_INTERVAL) || 3600000); // every hour
+  // Every hour at :00
+  cron.schedule('0 * * * *', () => channelCleanup(client), { timezone: TIMEZONE });
+
+  // Every day at midnight
+  cron.schedule('0 0 * * *', () => manageRoles(client), { timezone: TIMEZONE });
+
+  // Every 10 minutes
+  cron.schedule('*/10 * * * *', () => serverStats(client), { timezone: TIMEZONE });
+
+  // Monthly: 1st of month at 11:00 AM Paris time
+  cron.schedule('0 11 1 * *', () => monthlyWeatherMessage(client), { timezone: TIMEZONE });
 
   const commands: ReturnType<Command['create']>[] = [];
   const commandFiles = fs.readdirSync('./src/events/commands').filter(file => file.endsWith('.ts'));
