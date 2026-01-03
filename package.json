@@ -20,7 +20,8 @@
 	"scripts": {
 		"build": "tsc",
 		"dev": "tsc --watch & nodemon --watch dist dist/app.js",
-		"start": "node dist/app.js"
+		"start": "node dist/app.js",
+		"stats": "tsc && node dist/scripts/yearlyStats.js"
 	},
 	"devDependencies": {
 		"@types/node": "^25.0.3",
