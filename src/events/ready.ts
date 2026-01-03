@@ -1,6 +1,7 @@
 import fs from 'fs';
 import { Client } from 'discord.js';
 import cron from 'node-cron';
+import axios from 'axios';
 import { serverStats } from '../jobs/serverStats.js';
 import { channelCleanup } from '../jobs/channelCleanup.js';
 import { monthlyWeatherMessage } from '../jobs/monthlyWeatherMessage.js';
@@ -25,6 +26,13 @@ export async function invoke(client: Client) {
 
   // Monthly: 1st of month at 11:00 AM Paris time
   cron.schedule('0 11 1 * *', () => monthlyWeatherMessage(client), { timezone: TIMEZONE });
+
+  // Healthcheck ping
+  if (process.env.HEALTHCHECK_URL) {
+    const ping = () => axios.get(process.env.HEALTHCHECK_URL!).catch(() => {});
+    ping(); // Initial ping on startup
+    setInterval(ping, 120_000);
+  }
 
   const commands: ReturnType<Command['create']>[] = [];
   const commandFiles = fs.readdirSync('./src/events/commands').filter(file => file.endsWith('.ts'));
